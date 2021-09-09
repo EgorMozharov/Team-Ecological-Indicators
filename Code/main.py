@@ -46,42 +46,50 @@ K = [-1.9586, -0.3610, -0.3914]
 # fitted(a)
 
 tmp = []
+plt.figure(figsize=(10, 5))
 for i in range(0, len(data_S2_norm['Date'])):
     tmp.append(K[0]*(-2*U[i]*X_norm[i])+K[1]*(-V[i])+K[2])
-plt.scatter(data_S2_norm['Date'], tmp, color='green')
+plt.scatter(data_S2_norm['Date'], tmp, color='green', label='DCV')
 plt.plot(data_S2_norm['Date'], tmp, "g--", alpha=0.4)
 # Normalized
 tmp = 4*((data_S2_norm['Algae cell density norm'])**3)
-plt.plot(data_S2_norm['Date'], tmp)
+plt.plot(data_S2_norm['Date'], tmp, label='Observed value')
 plt.ylabel("Normalized algae cell denisity")
 plt.xlabel("Date")
+plt.legend()
 plt.show()
 
 # fitted(b)
 tmp = []
+plt.figure(figsize=(10, 5))
 for i in range(0, len(data_S2_norm['Date'])):
     tmp.append(K[0]*(-2*u1[i]*X_norm[i])+K[1]*(-V[i])+K[2])
-plt.scatter(data_S2_norm['Date'], tmp, color='green')
+plt.scatter(data_S2_norm['Date'], tmp, color='green', label='TP-CV')
 plt.plot(data_S2_norm['Date'], tmp, "g--", alpha=0.4)
 # Normalized
 tmp = 4*((data_S2_norm['Algae cell density norm'])**3)
-plt.plot(data_S2_norm['Date'], tmp)
+plt.plot(data_S2_norm['Date'], tmp, label='Observed value')
 plt.ylabel("Normalized algae cell denisity")
 plt.xlabel("Date")
+plt.legend()
 plt.show()
 #--------------------------------
 # DCCPI
+
 DCCPI=[]
+
 for i in range(0,len(data_S2_norm['Date'])):
     DCCPI.append(8*(K[0]*u1[i])**3 + 27*(K[1]*V[i]-K[2])**2)
 
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()
-ax1.bar(data_S2_norm['Date'], DCCPI, color='green')
+ax1.bar(data_S2_norm['Date'], DCCPI, color='green', label='DCCPI')
 tmp = 4*((data_S2_norm['Algae cell density norm'])**3)
-ax2.plot(data_S2_norm['Date'], tmp, 'b-')
+ax2.plot(data_S2_norm['Date'], tmp, 'b-', label='Observed value')
 
-ax1.set_xlabel("X data")
-ax1.set_ylabel("DCCPI", color='g')
+ax1.set_xlabel("Date")
+ax1.legend()
+ax1.set_ylabel("DCCPI", color='g', name='fefe')
 ax2.set_ylabel("Observed", color='b')
+plt.figure(figsize=(10, 5))
 plt.show()
